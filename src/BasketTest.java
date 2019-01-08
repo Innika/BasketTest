@@ -1,5 +1,5 @@
 import Models.Product;
-import org.testng.Assert;
+import Pages.ProductPage;
 import org.testng.annotations.Test;
 
 public class BasketTest extends BaseTest {
@@ -18,10 +18,9 @@ public class BasketTest extends BaseTest {
         //Step 4
         Product productItem = new Product();
         productItem.setName(productPage.getProductName()).setPrice(productPage.getPrice());
-        Assert.assertEquals(productArticle.name, productItem.name);
+        ((ProductPage)productPage.pageValidator.productSelectedMatсhesArticle(productArticle, productItem))
 
-        //Step 5
-        productPage.addToCart(false);
-
+                //step 5
+                .addToCart(false);
     }
 }

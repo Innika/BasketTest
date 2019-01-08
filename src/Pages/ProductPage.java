@@ -1,18 +1,25 @@
 package Pages;
 
+import Validators.ProductPageValidator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ProductPage extends BasePage {
-    public  ProductPage(WebDriver driver) {super(driver);}
+    public ProductPageValidator pageValidator;
 
-    public String getProductName(){
+    public ProductPage(WebDriver driver) {
+        super(driver);
+        pageValidator = new ProductPageValidator(this);
+    }
+
+
+    public String getProductName() {
         waitForElementToAppear(nameLabel);
         return nameLabel.getText();
     }
 
-    public Double getPrice(){
+    public Double getPrice() {
         waitForElementToAppear(priceLabel);
         String price = priceLabel.getText();
         price = price.replace(',', '.').substring(0, price.lastIndexOf(' '));
@@ -21,7 +28,7 @@ public class ProductPage extends BasePage {
         return Double.parseDouble(price);
     }
 
-    public ProductPage addToCart(Boolean goToCart){
+    public ProductPage addToCart(Boolean goToCart) {
         addToCartButton.click();
         waitForElementToAppear(goToCartButton);
 
